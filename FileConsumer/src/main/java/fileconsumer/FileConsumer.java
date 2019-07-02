@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.util.Scanner;
 
 public class FileConsumer {
 
@@ -27,6 +28,12 @@ public class FileConsumer {
             statement = connection.createStatement();
             String sql = "CREATE TABLE IF NOT EXISTS test (A VARCHAR, B VARCHAR, C VARCHAR, D VARCHAR, E VARCHAR, F VARCHAR, G VARCHAR, H VARCHAR, I VARCHAR, J VARCHAR)";
             statement.executeUpdate(sql);
+            
+            //Use Scanner to isolate file
+            Scanner scan = new Scanner(System.in);
+            System.out.print("Filename: ");
+            String filename = scan.next();
+            scan.close();
 
         } catch (Exception e) {
             e.printStackTrace();
