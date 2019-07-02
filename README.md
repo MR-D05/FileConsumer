@@ -16,8 +16,6 @@ Eclipse, Maven, sqlite-jdbc
 
 You can simply clone the project and import it into Eclipse, but if you are building the project from the ground up, you will need to setup a Maven project in Eclipse and copy the following contents into your pom.xml:
 
-Say what the step will be
-
 ```
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
