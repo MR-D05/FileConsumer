@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Scanner;
@@ -55,10 +56,52 @@ public class FileConsumer {
             //Initialize bad-data-<timestamp>.csv file with appropriate header from input file.
             line = br.readLine();
             writer.println(line);
+            
+            //Go over file
+            for (line = br.readLine(); line != null; line = br.readLine()) {
+                //Break up each line by comma and store result in string array.
+                String[] currentLine = line.split(",");
+                //Use helper function to determine bad entries
+                if (anyIndexIsEmpty(currentLine) == true) {
+                    writer.println(line);
+                    badEntries++;
+                }
+                //Good entries are added to the database
+                else {
+                    sql = "INSERT INTO test (A, B, C, D, E, F, G, H, I, J) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                    statement = connection.prepareStatement(sql);
+                    ((PreparedStatement) statement).setString(1, currentLine[0]);
+                    ((PreparedStatement) statement).setString(2, currentLine[1]);
+                    ((PreparedStatement) statement).setString(3, currentLine[2]);
+                    ((PreparedStatement) statement).setString(4, currentLine[3]);
+                    ((PreparedStatement) statement).setString(5, currentLine[4]);
+                    ((PreparedStatement) statement).setString(6, currentLine[5]);
+                    ((PreparedStatement) statement).setString(7, currentLine[6]);
+                    ((PreparedStatement) statement).setString(8, currentLine[7]);
+                    ((PreparedStatement) statement).setString(9, currentLine[8]);
+                    ((PreparedStatement) statement).setString(10, currentLine[9]);
+                    ((PreparedStatement) statement).executeUpdate();
+                    goodEntries++;
+                }
+                numberOfEntries++;
+            }
+            br.close();
+            writer.close();
+            statement.close();
+            connection.close();
 
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(0);
         }
+    }
+    
+    public static boolean anyIndexIsEmpty(String[] currentLine) {
+        for (int i = 0; i < currentLine.length; i++) {
+            if (currentLine[i].isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
