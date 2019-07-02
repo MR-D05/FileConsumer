@@ -4,9 +4,21 @@ Java application that will consume a CSV file, parse the data and insert to a SQ
 
 ## Getting Started
 
+Clone the repository:
+
 ```
 git clone https://github.com/MR-D05/FileConsumer.git
 ```
+
+Open Eclipse, and right-click in the Package Explorer, and choose "import".
+
+Expand the Maven tab, and choose "Existing Maven Projects". 
+
+Choose "Browse" and navigate to where you cloned the repository. Click "Finish".
+
+From here you can simply run the project by clicking the green arrow at the top of your Eclipse browser. 
+
+In the console, enter the name of the input file "ms3Interview.csv" when prompted. 
 
 ### Prerequisites
 
@@ -35,6 +47,12 @@ You can simply clone the project and import it into Eclipse, but if you are buil
     </dependencies>
 </project>
 ```
+After doing so, you can right-click your project in the Package Explorer, hover over "Maven", and select "Download Sources".
+
+### Experience
+
+I ended up using a non-transient SQLite database so that I could reference the table as I was unsure whether it was possible to do so using an in-memory database. There was some back and forth troubleshooting the database connection, and in the end I used prepared statements to feed that data. I got a bit tripped up on one of the caveats of the project: "Elements with commas will be double quoted." My solution, which came after a bit of trouble, was to update the initial regex I used: splitting the lines on simply a comma, which was insufficient. I settled on an updated regex that split lines on a comma that is followed by an even number of double quotes. To described what I did for the rest of the program: I used BufferedReader to iterate over the file and PrintWriter to write to a log file the bad entries.  
+
 ## Built With
 
 * [Eclipse](https://www.eclipse.org) - IDE
