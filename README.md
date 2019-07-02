@@ -49,7 +49,7 @@ You can simply clone the project and import it into Eclipse, but if you are buil
 ```
 ### Experience
 
-The project was pretty straightforward. I ended up using an actual non-transient SQLite database so that I could reference the table as I was unsure whether this was possible using an in-memory databse. There was some back and forth troubleshooting the database connection, and in the end I used prepared statements to enter the data into the database. I got a bit tripped up on one of the caveats of the project to use double quotes on entries that use commas, I think my implementation accounts for this. I used BufferedReader to iterate over the file and PrintWriter to write to a log file the bad entries.  
+I ended up using a non-transient SQLite database so that I could reference the table as I was unsure whether it was possible to do so using an in-memory databse. There was some back and forth troubleshooting the database connection, and in the end I used prepared statements to enter the data into the database. I got a bit tripped up on one of the caveats of the project to use double quotes on entries that use commas, I think my implementation accounts for this. I used BufferedReader to iterate over the file and PrintWriter to write to a log file the bad entries.  
 
 ## Built With
 
