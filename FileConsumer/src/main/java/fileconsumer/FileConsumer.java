@@ -60,7 +60,7 @@ public class FileConsumer {
 			//Go over file
 			for (line = br.readLine(); line != null; line = br.readLine()) {
 				//Break up each line by comma and store result in string array
-				String[] currentLine = line.split(",");
+				String[] currentLine = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");
 				//Use helper function to determine bad entries
 				if (anyIndexIsEmpty(currentLine) == true) {
 					writer.println(line);
