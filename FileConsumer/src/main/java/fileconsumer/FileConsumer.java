@@ -1,5 +1,9 @@
 package fileconsumer;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
@@ -34,6 +38,23 @@ public class FileConsumer {
             System.out.print("Filename: ");
             String filename = scan.next();
             scan.close();
+
+            File file = null;
+            if (!filename.isEmpty())
+                file = new File(filename);
+            else {
+                System.err.println("Unknown filename.");
+                System.exit(0);
+            }
+
+            //Use FileReader and BufferedReader to parse file.
+            FileReader fileReader = new FileReader(file);
+            BufferedReader br = new BufferedReader(fileReader);
+            PrintWriter writer = new PrintWriter("bad-data-" + timestamp.getTime() + ".csv", "UTF-8");
+
+            //Initialize bad-data-<timestamp>.csv file with appropriate header from input file.
+            line = br.readLine();
+            writer.println(line);
 
         } catch (Exception e) {
             e.printStackTrace();
