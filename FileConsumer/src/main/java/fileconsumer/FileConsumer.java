@@ -89,6 +89,19 @@ public class FileConsumer {
             writer.close();
             statement.close();
             connection.close();
+            
+            System.out.println("Number of entries: " + numberOfEntries);
+            System.out.println("Number of successful entries: " + goodEntries);
+            System.out.println("Number of failed entries: " + badEntries);
+
+            //Statistics
+            writer = new PrintWriter("statistics.txt", "UTF-8");
+            writer.append("Number of entries: " + numberOfEntries);
+            writer.append("\n");
+            writer.append("Number of successful entries: " + goodEntries);
+            writer.append("\n");
+            writer.append("Number of failed entries: " + badEntries);
+            writer.close();
 
         } catch (Exception e) {
             e.printStackTrace();
